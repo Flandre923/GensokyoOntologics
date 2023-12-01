@@ -8,6 +8,7 @@ import net.minecraft.util.math.vector.Vector3d;
 
 import java.util.List;
 
+//控制芙兰（FlandreScarletEntity）实体进行符卡攻击。
 public class FlandreSpellAttackGoal extends SpellCardAttackGoal {
 
     private final FlandreScarletEntity flandre;
@@ -25,6 +26,10 @@ public class FlandreSpellAttackGoal extends SpellCardAttackGoal {
         this.speed = speedIn;
     }
 
+//控制芙兰（FlandreScarletEntity）实体进行符卡攻击。
+//在攻击目标存活且可见的情况下，使芙兰朝目标移动并执行符卡攻击。
+//在目标不可见的情况下，停止移动。
+//在目标死亡或不存在的情况下，停止执行攻击。
     @Override
     public void tick() {
         ticksExisted++;
@@ -50,7 +55,7 @@ public class FlandreSpellAttackGoal extends SpellCardAttackGoal {
             this.flandre.getNavigator().clearPath();
         }
     }
-
+//shouldExecute()方法确定是否应该执行任务
     @Override
     public boolean shouldExecute() {
         LivingEntity target = this.flandre.getAttackTarget();
@@ -60,7 +65,7 @@ public class FlandreSpellAttackGoal extends SpellCardAttackGoal {
         this.path = this.flandre.getNavigator().pathfind(target, 0);
         return path != null;
     }
-
+//在重置任务时，如果目标是玩家且无法被攻击（处于旁观模式或创造模式），将攻击目标设为null并停止移动。
     @Override
     public void resetTask() {
         LivingEntity target = this.flandre.getAttackTarget();
@@ -71,7 +76,7 @@ public class FlandreSpellAttackGoal extends SpellCardAttackGoal {
         }
         this.flandre.getNavigator().clearPath();
     }
-
+//在开始执行任务时，设置芙兰的导航路径并指定速度。
     @Override
     public void startExecuting() {
         this.flandre.getNavigator().setPath(this.path, this.speed);

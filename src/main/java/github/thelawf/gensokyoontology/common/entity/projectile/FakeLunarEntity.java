@@ -18,6 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+// 假月亮
 public class FakeLunarEntity extends AbstractDanmakuEntity {
 
     public FakeLunarEntity(EntityType<? extends ThrowableEntity> type, World worldIn) {

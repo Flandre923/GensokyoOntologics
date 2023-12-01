@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-
+//阴阳鱼弹幕
 public class InYoJadeDanmakuEntity extends AbstractDanmakuEntity {
 
     public InYoJadeDanmakuEntity(World worldIn, Entity shooter) {

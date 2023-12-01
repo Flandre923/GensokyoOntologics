@@ -18,14 +18,14 @@ public class FairyAttackGoal extends Goal {
     private final double speedIn;
     private Path path;
     private int withInRangeTime;
-
+// 可以指定精灵实体、最小攻击距离、接近速度
     public FairyAttackGoal(FairyEntity entityFairy, double minDistance, double speedIn) {
         this.fairy = entityFairy;
         this.minDistance = minDistance;
         this.speedIn = speedIn;
     }
 
-
+// shouldExecute方法会判断是否开始执行攻击
     @Override
     public boolean shouldExecute() {
         LivingEntity target = this.fairy.getAttackTarget();
@@ -35,12 +35,12 @@ public class FairyAttackGoal extends Goal {
         this.path = this.fairy.getNavigator().pathfind(target, 0);
         return path != null;
     }
-
+//startExecuting方法会导航到目标entity
     @Override
     public void startExecuting() {
         this.fairy.getNavigator().setPath(this.path, this.speedIn);
     }
-
+//tick方法为主要执行逻辑,判断距离是否到达攻击并释放弹幕
     @Override
     public void tick() {
         LivingEntity target = this.fairy.getAttackTarget();
@@ -67,6 +67,7 @@ public class FairyAttackGoal extends Goal {
         }
     }
 
+//shouldContinueExecuting判断是否继续攻击目标
     @Override
     public boolean shouldContinueExecuting() {
         LivingEntity target = this.fairy.getAttackTarget();
@@ -78,7 +79,7 @@ public class FairyAttackGoal extends Goal {
             return !isPlayerAndCanNotBeAttacked;
         }
     }
-
+//resetTask会在攻击结束后重置AI状态
     @Override
     public void resetTask() {
         LivingEntity target = this.fairy.getAttackTarget();

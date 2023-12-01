@@ -17,7 +17,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 
 public class SetRailCommand {
-
+//register方法用于在命令调度器中注册这个命令
+//命令接受两个BlockPos类型的参数pos_a和pos_b
+//当命令执行时,会调用setRail方法,传入命令源和两个坐标点
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(Commands.literal("setrail").requires((literal) -> {
             return literal.hasPermissionLevel(2);
@@ -34,7 +36,7 @@ public class SetRailCommand {
         return 0;
     }
      */
-
+//setRail方法中会执行设置铁轨的相关逻辑
     public static int setRail(CommandSource source, BlockPos posA, BlockPos posB) {
         return 0;
     }

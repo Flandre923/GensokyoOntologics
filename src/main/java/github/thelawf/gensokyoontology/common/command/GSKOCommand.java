@@ -21,7 +21,7 @@ public class GSKOCommand {
 
     public static final ImmutableList<String> GSKO_CMD_LITERALS = ImmutableList.of(
             "startCountDown", "endCountDown");
-
+//register方法用来在调度器中注册这些自定义命令
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         LiteralArgumentBuilder<CommandSource> literalargumentbuilder = Commands.literal("gsko");
 
@@ -32,7 +32,7 @@ public class GSKOCommand {
         }
         dispatcher.register(literalargumentbuilder);
     }
-
+//每个命令均执行一个execute方法来处理
     private static int execute(CommandSource source, String cmdIn) throws CommandSyntaxException {
         if (!source.getWorld().isRemote && cmdIn.equals("startCountDown")) {
             CountDownNetworking.INSTANCE.send(PacketDistributor.PLAYER.with(

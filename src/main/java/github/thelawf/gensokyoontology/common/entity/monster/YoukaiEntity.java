@@ -33,14 +33,14 @@ public abstract class YoukaiEntity extends RetreatableEntity {
     protected YoukaiEntity(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);
     }
-
+//方法用于注册实体的数据参数，包括isRetreated和favorability。
     @Override
     protected void registerData() {
         super.registerData();
         this.dataManager.register(DATA_RETREATED, this.isRetreated);
         this.dataManager.register(DATA_FAVORABILITY, this.favorability);
     }
-
+//方法在实体死亡时被调用，如果妖怪没有被退治，则重置其健康值，并将其所有者设置为导致死亡的实体（如果是玩家），然后将其设置为已退治状态。
     @Override
     public void onDeath(@NotNull DamageSource cause) {
         if (!this.isRetreated) {
@@ -52,7 +52,7 @@ public abstract class YoukaiEntity extends RetreatableEntity {
         }
         super.onDeath(cause);
     }
-
+// 方法用于获取和设置妖怪的好感度。
     public int getFavorability() {
         return this.dataManager.get(DATA_FAVORABILITY);
     }
@@ -60,7 +60,7 @@ public abstract class YoukaiEntity extends RetreatableEntity {
     public void setFavorability(int favorabilityIn) {
         this.dataManager.set(DATA_FAVORABILITY, favorabilityIn);
     }
-
+// setRetreated()和isRetreated()方法用于设置和判断妖怪是否被退治。
     public void setRetreated(boolean isRetreated) {
         this.dataManager.set(DATA_RETREATED, isRetreated);
     }
@@ -68,6 +68,7 @@ public abstract class YoukaiEntity extends RetreatableEntity {
     public boolean isRetreated() {
         return this.dataManager.get(DATA_RETREATED);
     }
+    // setAnimation()和getAnimation()方法用于设置和获取妖怪的动画（仅在客户端使用）。
     @OnlyIn(Dist.CLIENT)
     public void setAnimation(Animation animation) {
         this.animation = animation;

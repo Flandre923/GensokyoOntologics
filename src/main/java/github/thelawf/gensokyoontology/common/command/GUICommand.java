@@ -14,13 +14,13 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class GUICommand implements Command<CommandSource> {
 
     public static final GUICommand GUI_COMMAND = new GUICommand();
-
+//提供了一个register方法用于在调度器中注册该命令
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         LiteralCommandNode<CommandSource> commandNode = dispatcher.register(
                 Commands.literal("client").executes(GUI_COMMAND)
         );
     }
-
+//run方法会在命令执行时被调用,该方法中打开了一个自定义的GUI
     @Override
     public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = context.getSource().asPlayer();

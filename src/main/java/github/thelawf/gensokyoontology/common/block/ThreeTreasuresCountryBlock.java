@@ -11,7 +11,7 @@ import net.minecraft.world.IBlockReader;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-
+//三宝国 方块？
 public class ThreeTreasuresCountryBlock extends Block {
     public ThreeTreasuresCountryBlock() {
         super(Properties.from(Blocks.OBSIDIAN));

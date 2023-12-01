@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-
+//中弹？
 public class ScaleShotEntity extends AbstractDanmakuEntity {
 
     public ScaleShotEntity(EntityType<? extends ThrowableEntity> type, World worldIn) {

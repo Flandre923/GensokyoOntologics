@@ -5,6 +5,7 @@ import net.minecraft.entity.ai.goal.Goal;
 
 import java.util.List;
 
+//SpellCardAttackGoal类是一个抽象类，用于控制符卡战斗的目标行为。
 public abstract class SpellCardAttackGoal extends Goal {
 
 
@@ -21,6 +22,7 @@ public abstract class SpellCardAttackGoal extends Goal {
     public SpellCardAttackGoal(List<Stage> stages) {
         this.stages = stages;
     }
+    //Type枚举定义了符卡的几种类型，包括非符、可击破符卡和时符。
 
     public enum Type {
         /**
@@ -39,7 +41,7 @@ public abstract class SpellCardAttackGoal extends Goal {
         TEMPORAL_SPELL;
 
     }
-
+//Stage类是一个表示符卡战斗阶段的数据结构，包括符卡类型、符卡实体、持续时间和是否可击破等属性。
     public static class Stage {
         public final Type type;
         public final SpellCardEntity spellCard;

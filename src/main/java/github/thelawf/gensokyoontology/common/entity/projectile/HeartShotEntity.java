@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//心形弹幕
 @OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
 public class HeartShotEntity extends AbstractDanmakuEntity implements IRendersAsItem {
 
@@ -34,7 +34,7 @@ public class HeartShotEntity extends AbstractDanmakuEntity implements IRendersAs
     public HeartShotEntity(LivingEntity throwerIn, World worldIn, DanmakuType danmakuTypeIn, DanmakuColor danmakuColorIn) {
         super(EntityRegistry.HEART_SHOT_ENTITY.get(), throwerIn, worldIn, danmakuTypeIn, danmakuColorIn);
     }
-
+    //applyTransform()方法根据给定的变换函数对弹幕进行变换。这个方法在tick()方法中被调用。
     @Override
     public void tick() {
         super.tick();

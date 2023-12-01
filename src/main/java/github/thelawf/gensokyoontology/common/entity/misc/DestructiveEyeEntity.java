@@ -43,7 +43,7 @@ public class DestructiveEyeEntity extends CollideDamageEntity implements IRender
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
-
+//getItem()方法返回与该实体关联的物品堆栈。
     @Override
     public ItemStack getItem() {
         return new ItemStack(ItemRegistry.DESTRUCTIVE_EYE.get());

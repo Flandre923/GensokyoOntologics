@@ -21,12 +21,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
+//它是一个可以放置的方块,扩展了Block类
 public class SpaceFissureBlock extends Block {
 
     public static final Logger LOGGER = LogManager.getLogger();
     private static final VoxelShape shape;
-
+// /定义了一个细长矩形的VoxelShape作为方块体积
     static {
         VoxelShape portalPane = Block.makeCuboidShape(1, 0, 8, 15, 24, 8);
         shape = VoxelShapes.or(portalPane);
@@ -40,13 +40,14 @@ public class SpaceFissureBlock extends Block {
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
-
+//与一个SpaceFissureTileEntity方块实体绑定
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader worldIn) {
         return new SpaceFissureTileEntity();
     }
-
+//当其他实体碰撞时会造成伤害
+//当玩家碰撞时,会尝试将其传送到另一个维度(主世界或自定义的元世界)
     @SuppressWarnings("deprecation")
     @Override
     public void onEntityCollision(BlockState state, @NotNull World worldIn, BlockPos pos, Entity entityIn) {

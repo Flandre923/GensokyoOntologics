@@ -13,6 +13,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.Nullable;
 
+//GSKOCapabilities是一个注册和提供自定义capability的工具类。它将各种capability类注册到系统中,并提供静态入口访问这些capability。
 public class GSKOCapabilities {
 
     @CapabilityInject(BloodyMistCapability.class)

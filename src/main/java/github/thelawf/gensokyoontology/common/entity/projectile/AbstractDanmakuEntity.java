@@ -32,9 +32,10 @@ import javax.annotation.Nonnull;
  */
 @OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
 public abstract class AbstractDanmakuEntity extends ThrowableEntity implements IRendersAsItem {
+    // 弹幕的最大存活时间，damage变量表示弹幕的伤害值。
     private int maxLivingTick = 125;
     protected float damage = 2.0f;
-
+// 弹幕的颜色。
     private int danmakuColor;
     public static final DataParameter<Integer> DATA_COLOR = EntityDataManager.createKey(
             AbstractDanmakuEntity.class, DataSerializers.VARINT);
@@ -57,6 +58,7 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
     protected AbstractDanmakuEntity(EntityType<? extends ThrowableEntity> type, World worldIn) {
         super(type, worldIn);
     }
+    // 初始化弹幕实体的属性。
 
     public AbstractDanmakuEntity(EntityType<? extends ThrowableEntity> type, LivingEntity throwerIn, World world, SpellData spellData) {
         this(type, world);
@@ -74,7 +76,7 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
         this.setDanmakuColor(danmakuColorIn);
         this.setShooter(throwerIn);
     }
-
+// 用于设置和获取弹幕的最大存活时间。
     public void setMaxLivingTick(int maxLivingTick) {
         this.maxLivingTick = maxLivingTick;
     }
@@ -82,7 +84,7 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
     public int getMaxLivingTick() {
         return maxLivingTick;
     }
-
+// 用于更新弹幕的状态，如果超过了最大存活时间，则将其移除。
     @Override
     public void tick() {
         super.tick();
@@ -95,7 +97,7 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
             this.remove();
         }
     }
-
+// readAdditional()和writeAdditional()方法用于读取和写入额外的数据到弹幕实体的NBT数据中，包括伤害值、颜色和法术数据等
     @Override
     protected void readAdditional(@NotNull CompoundNBT compound) {
         super.readAdditional(compound);
@@ -121,21 +123,21 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
             compound.putString("SpellData", SerializerRegistry.SPELL_DATA.getId().toString());
         }
     }
-
+//registerData()方法用于注册实体的数据参数，包括伤害值、法术数据和颜色。
     @Override
     protected void registerData() {
         this.dataManager.register(DATA_DAMAGE, this.damage);
         this.dataManager.register(DATA_SPELL, this.spellData);
         this.dataManager.register(DATA_COLOR, this.danmakuColor);
     }
-
+// createSpawnPacket()方法用于创建一个用于生成实体的数据包
     @Override
     @Nonnull
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-
+// setShooter()和getShooter()方法用于设置和获取弹幕的发射者
     @Override
     public void setShooter(@Nullable Entity entityIn) {
         super.setShooter(entityIn);
@@ -146,17 +148,17 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
     public Entity getShooter() {
         return super.getShooter();
     }
-
+// setNoGravity()方法用于设置弹幕是否受重力影响。
     @Override
     public void setNoGravity(boolean noGravity) {
         super.setNoGravity(true);
     }
-
+// canBeCollidedWith()方法用于判断弹幕是否可以与其他实体碰撞。
     @Override
     public boolean canBeCollidedWith() {
         return true;
     }
-
+// onEntityHit()方法在弹幕与实体发生碰撞时被调用，根据弹幕的类型和被碰撞实体的类型进行相应的处理。
     @Override
     protected void onEntityHit(@NotNull EntityRayTraceResult result) {
         if (this.getShooter() instanceof MonsterEntity || this.getShooter() instanceof IAngerable) {
@@ -195,7 +197,7 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
             this.remove();
         }
     }
-
+//setSpellData()和getSpellData()方法用于设置和获取弹幕的法术数据。
     public void setSpellData(SpellData spellData) {
         this.dataManager.set(DATA_SPELL, spellData);
     }
@@ -203,7 +205,7 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
     public SpellData getSpellData() {
         return this.dataManager.get(DATA_SPELL);
     }
-
+//setDanmakuColor()和getDanmakuColor()方法用于设置和获取弹幕的颜色。
     public void setDanmakuColor(DanmakuColor danmakuColor) {
         this.dataManager.set(DATA_COLOR, danmakuColor.ordinal());
     }
@@ -217,7 +219,7 @@ public abstract class AbstractDanmakuEntity extends ThrowableEntity implements I
     public DanmakuColor getDanmakuColor() {
         return DanmakuColor.values()[this.dataManager.get(DATA_COLOR)];
     }
-
+//getDanmakuType()方法用于获取弹幕的类型。
     public DanmakuType getDanmakuType() {
         return DanmakuType.values()[0];
     }

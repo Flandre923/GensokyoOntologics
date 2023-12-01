@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-
+//小弹？
 public class SmallShotEntity extends AbstractDanmakuEntity {
 
     public SmallShotEntity(EntityType<? extends ThrowableEntity> type, World worldIn) {

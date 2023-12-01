@@ -21,8 +21,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-
+//LaserSourceEntity类是一个实体类，表示激光源实体。
+//该类继承自AffiliatedEntity类，并实现了IRayTraceReader接口
 public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceReader {
+    //LaserSourceEntity实体具有一定的寿命、准备时间和范围属性，以及一个ARGB颜色值和一组行为列表。
     private int lifespan = 100;
     private int preparation = 30;
     private float range = 30;
@@ -31,6 +33,7 @@ public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceRead
     public static final DataParameter<Integer> DATA_LIFESPAN = EntityDataManager.createKey(LaserSourceEntity.class, DataSerializers.VARINT);
     public static final DataParameter<Integer> DATA_PREPARATION = EntityDataManager.createKey(LaserSourceEntity.class, DataSerializers.VARINT);
     public static final DataParameter<Float> DATA_RANGE = EntityDataManager.createKey(LaserSourceEntity.class, DataSerializers.FLOAT);
+    //构造函数接受一个EntityType和World参数，并初始化实体的属性。
     public LaserSourceEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, null, worldIn);
         this.ignoreFrustumCheck = true;
@@ -42,7 +45,7 @@ public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceRead
         this.ignoreFrustumCheck = true;
         this.init(100, 30, 30F);
     }
-
+// /registerData()方法用于注册实体的数据。
     @Override
     protected void registerData() {
         super.registerData();
@@ -50,7 +53,7 @@ public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceRead
         this.dataManager.register(DATA_PREPARATION, this.preparation);
         this.dataManager.register(DATA_RANGE, this.range);
     }
-
+//readAdditional()和writeAdditional()方法用于读取和写入实体的额外数据。
     @Override
     protected void readAdditional(@NotNull CompoundNBT compound) {
         super.readAdditional(compound);
@@ -75,7 +78,7 @@ public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceRead
         compound.putInt("preparation", this.preparation);
         compound.putInt("argb", this.argb);
     }
-
+//tick()方法在每个游戏刻中执行逻辑，包括更新实体位置、检测碰撞并造成伤害。
     @Override
     public void tick() {
         super.tick();
@@ -97,13 +100,13 @@ public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceRead
                     .forEach(living -> living.attackEntityFrom(GSKODamageSource.LASER, 3));
         }
     }
-
+//init()方法用于初始化实体的寿命、准备时间和范围属性。
     public void init(int lifespan, int preparation, float range) {
         this.setLifespan(lifespan);
         this.setPreparation(preparation);
         this.setRange(range);
     }
-
+//getLifespan()、getPreparation()和getRange()方法用于获取实体的寿命、准备时间和范围属性。
     public int getLifespan() {
         return this.dataManager.get(DATA_LIFESPAN) == 0 ? this.lifespan : this.dataManager.get(DATA_LIFESPAN);
     }
@@ -120,11 +123,11 @@ public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceRead
     public int getPreparation() {
         return this.dataManager.get(DATA_PREPARATION) == 0 ? this.preparation : this.dataManager.get(DATA_PREPARATION);
     }
-
+//shouldEmit()方法确定实体是否应该发射激光。
     public boolean shouldEmit() {
         return this.ticksExisted >= this.getPreparation() && this.ticksExisted < this.getLifespan();
     }
-
+//setLifespan()、setPreparation()和setRange()方法用于设置实体的寿命、准备时间和范围属性
     public void setPreparation(int preparation) {
         this.preparation = preparation;
         this.dataManager.set(DATA_PREPARATION, preparation);
@@ -138,7 +141,7 @@ public class LaserSourceEntity extends AffiliatedEntity implements IRayTraceRead
         this.range = range;
         this.dataManager.set(DATA_RANGE, range);
     }
-
+//setARGB()、getARGB()、getAlpha()、getRed()、getGreen()和getBlue()方法用于设置和获取实体的ARGB颜色值的各个分量。
     @OnlyIn(Dist.CLIENT)
     public void setARGB(int argb) {
         this.argb = argb;

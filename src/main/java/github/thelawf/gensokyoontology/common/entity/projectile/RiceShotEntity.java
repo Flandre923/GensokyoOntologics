@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-
+//米单
 public class RiceShotEntity extends AbstractDanmakuEntity {
 
     public RiceShotEntity(EntityType<? extends ThrowableEntity> type, World worldIn) {

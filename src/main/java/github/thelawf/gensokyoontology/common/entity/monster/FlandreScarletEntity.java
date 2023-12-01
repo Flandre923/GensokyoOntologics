@@ -38,13 +38,13 @@ public class FlandreScarletEntity extends YoukaiEntity implements ISpellCardUser
         this.favorability = -10;
         // this.setHeldItem(Hand.MAIN_HAND, new ItemStack(ItemRegistry.CLOCK_HAND_ITEM.get()));
     }
-
+// 方法在此处没有具体实现。
     @Nullable
     @Override
     public AgeableEntity createChild(ServerWorld world, AgeableEntity mate) {
         return null;
     }
-
+//registerGoals()方法用于注册实体的行为目标。
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
@@ -60,13 +60,13 @@ public class FlandreScarletEntity extends YoukaiEntity implements ISpellCardUser
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(5, new ResetAngerGoal<>(this, true));
     }
-
+// getEntityInteractionResult()方法处理与实体交互的结果。
     @Override
     @NotNull
     public ActionResultType getEntityInteractionResult(@NotNull PlayerEntity playerIn, @NotNull Hand hand) {
         return super.getEntityInteractionResult(playerIn, hand);
     }
-
+// livingTick()方法在每个游戏刻中执行逻辑，包括设置实体的动画状态。
     @Override
     public void livingTick() {
         super.livingTick();
@@ -76,23 +76,23 @@ public class FlandreScarletEntity extends YoukaiEntity implements ISpellCardUser
             this.setAnimation(Animation.IDLE);
         }
     }
-
+//tick()方法在每个游戏刻中执行逻辑。
     @Override
     public void tick() {
         super.tick();
     }
-
+//createSpawnPacket()方法用于创建生成实体的数据包。
     @Override
     @NotNull
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
-
+//onDeath()方法在实体死亡时执行的操作。
     @Override
     public void onDeath(@NotNull DamageSource cause) {
         super.onDeath(cause);
     }
-
+//getAngerTime()和setAngerTime()方法用于获取和设置实体的愤怒时间。
     @Override
     public int getAngerTime() {
         return super.getAngerTime();
@@ -102,7 +102,7 @@ public class FlandreScarletEntity extends YoukaiEntity implements ISpellCardUser
     public void setAngerTime(int time) {
         super.setAngerTime(time);
     }
-
+//getAngerTarget()和setAngerTarget()方法用于获取和设置实体的愤怒目标。
     @Nullable
     @Override
     public UUID getAngerTarget() {
@@ -118,13 +118,13 @@ public class FlandreScarletEntity extends YoukaiEntity implements ISpellCardUser
     public void func_230258_H__() {
         super.func_230258_H__();
     }
-
+//spellCardAttack()方法实现了ISpellCardUser接口的方法，用于执行符卡攻击操作。
     @Override
     public void spellCardAttack(SpellCardEntity spellCard, int ticksIn) {
         if (spellCard == null) return;
         spellCard.onTick(this.world, this, ticksIn);
     }
-
+//Doppelganger类是FlandreScarletEntity的一个子类，代表Flandre Scarlet的分身实体。
     public static class Doppelganger extends FlandreScarletEntity {
         public static final EntityType<Doppelganger> FLANDRE_DOPPELGANGER = EntityType.Builder.create(
                         Doppelganger::new, EntityClassification.CREATURE).setShouldReceiveVelocityUpdates(true)
@@ -133,7 +133,7 @@ public class FlandreScarletEntity extends YoukaiEntity implements ISpellCardUser
         public Doppelganger(EntityType<? extends TameableEntity> type, World worldIn) {
             super(type, worldIn);
         }
-
+//registerGoals()方法在Doppelganger类中重写，注册了特定的行为目标，包括施放符卡攻击和跟随主人等行为。
         @Override
         protected void registerGoals() {
             List<SpellCardAttackGoal.Stage> stages = new ArrayList<>();

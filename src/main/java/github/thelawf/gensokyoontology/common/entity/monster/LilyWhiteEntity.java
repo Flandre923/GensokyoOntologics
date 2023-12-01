@@ -24,9 +24,10 @@ public class LilyWhiteEntity extends ConversationalEntity implements ISpellCardU
 
     public LilyWhiteEntity(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);
+// 设置对话对话树（dialog tree）为"lily_white"。
         this.setDialog(new DialogTreeNode("lily_white"));
     }
-
+//registerGoals()方法用于注册实体的行为目标
     @Override
     protected void registerGoals() {
         List<SpellCardAttackGoal.Stage> stages = new ArrayList<>();
@@ -41,7 +42,7 @@ public class LilyWhiteEntity extends ConversationalEntity implements ISpellCardU
 
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
-
+// spellCardAttack()方法实现了ISpellCardUser接口的方法，用于执行符卡攻击操作。在此处的实现中，对符卡进行了一些逻辑处理，并使用了注释的代码段来生成并发射子弹实体。
     @Override
     public void spellCardAttack(SpellCardEntity spellCard, int ticksIn) {
         if (spellCard == null) {
@@ -64,19 +65,20 @@ public class LilyWhiteEntity extends ConversationalEntity implements ISpellCardU
         //     world.addEntity(riceShot);
         // }
     }
-
+// createChild()方法在此处没有具体实现。
     @Nullable
     @Override
     public AgeableEntity createChild(@NotNull ServerWorld world, @NotNull AgeableEntity mate) {
         return null;
     }
 
+// createSpawnPacket()方法用于创建生成实体的数据包。
     @Override
     @NotNull
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
-
+// getAngerTime()和setAngerTime()方法用于获取和设置实体的愤怒时间。
     @Override
     public int getAngerTime() {
         return 0;
@@ -86,7 +88,7 @@ public class LilyWhiteEntity extends ConversationalEntity implements ISpellCardU
     public void setAngerTime(int time) {
 
     }
-
+// getAngerTarget()和setAngerTarget()方法用于获取和设置实体的愤怒目标。
     @Nullable
     @Override
     public UUID getAngerTarget() {
@@ -97,13 +99,13 @@ public class LilyWhiteEntity extends ConversationalEntity implements ISpellCardU
     public void setAngerTarget(@Nullable UUID target) {
 
     }
-
+// func_230258_H__()方法在此处没有具体实现。
     @Override
     public void func_230258_H__() {
 
     }
 
-
+// getNextDialog()方法实现了对话树的逻辑，根据选项索引返回下一个对话节点。
     @Override
     public DialogTreeNode getNextDialog(int optionIndex) {
         return optionIndex == 0 ? new DialogTreeNode("root").accessBranch(optionIndex) :
