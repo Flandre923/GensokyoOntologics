@@ -21,14 +21,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
+//它是一个可以放置的方块,扩展了Block类
 public class SorceryExtractorBlock extends Block {
     public SorceryExtractorBlock() {
         super(Properties.from(Blocks.ENCHANTING_TABLE));
     }
 
     public static final VoxelShape shape;
-
+//定义了一个立体的VoxelShape作为方块的碰撞体积
     static {
         VoxelShape terrace = Block.makeCuboidShape(0, 0, 0, 16, 7, 16);
         VoxelShape crystal = Block.makeCuboidShape(7, 7, 9, 7, 16, 9);
@@ -39,13 +39,13 @@ public class SorceryExtractorBlock extends Block {
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
-
+//与一个SorceryExtractorTileEntity方块实体绑定
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new SorceryExtractorTileEntity();
     }
-
+//在玩家点击时打开一个名为SorceryExtractorContainer的自定义GUI容器
     @SuppressWarnings("deprecation")
     @Override
     @NotNull
@@ -61,7 +61,7 @@ public class SorceryExtractorBlock extends Block {
         }
         return ActionResultType.SUCCESS;
     }
-
+//提供了一个方法用于创建该方块的容器提供者
     public INamedContainerProvider createContainer(World worldIn, BlockPos pos) {
         return new SimpleNamedContainerProvider(SorceryExtractorContainer::new,
                 SorceryExtractorTileEntity.CONTAINER_NAME);

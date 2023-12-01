@@ -18,7 +18,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
+/**
+ * 总的来说,DanmakuTableBlock是一个带有自定义Gui的可交互方块。
+ * 它与一个TileEntity绑定以提供特定的容器和界面
+ * 玩家点击它时可以打开这个自定义的界面。
+ */
 public class DanmakuTableBlock extends Block {
     public DanmakuTableBlock() {
         super(Properties.from(Blocks.CRAFTING_TABLE).sound(SoundType.WOOD));

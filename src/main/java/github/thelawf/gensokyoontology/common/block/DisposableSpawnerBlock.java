@@ -16,7 +16,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
+/**
+ * 总的来说,DisposableSpawnerBlock是一个可以通过刷怪蛋来设置刷出生物的刷怪笼。
+ * 它与一个TileEntity绑定以控制刷怪类型。
+ * 玩家可以通过使用刷怪蛋来定义它刷出的生物。
+ */
 public class DisposableSpawnerBlock extends Block {
     public DisposableSpawnerBlock() {
         super(Properties.from(Blocks.SPAWNER));
